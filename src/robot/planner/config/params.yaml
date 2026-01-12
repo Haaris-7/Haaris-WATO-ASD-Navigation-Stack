@@ -1,3 +1,11 @@
-# planner_node:
-#   ros__parameters:
-    
+planner:
+  ros__parameters:
+    planner_timer_ms: 200
+    goal_reached_threshold_m: 0.4
+    occ_threshold: 40
+    connectivity: 8
+    heuristic_type: "euclidean"
+    plan_timeout_s: 1.0
+    map_frame_id: "sim_world"
+    cost_weight: 12.0
+    max_failed_plans: 3

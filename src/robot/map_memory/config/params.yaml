@@ -1,3 +1,8 @@
-# map_memory_node:
-#   ros__parameters:
-    
+map_memory:
+  ros__parameters:
+    map_resolution: 0.15
+    map_width_m: 40.0
+    map_height_m: 40.0
+    map_frame_id: "sim_world"
+    fusion_distance_threshold_m: 0.5
+    fusion_timer_hz: 2.0

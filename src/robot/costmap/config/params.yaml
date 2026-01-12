@@ -1,3 +1,8 @@
-# costmap_node:
-#   ros__parameters:
-
+costmap:
+  ros__parameters:
+    costmap_resolution: 0.1
+    costmap_width_m: 40.0
+    costmap_height_m: 40.0
+    inflation_radius_m: 1.2
+    inflation_max_cost: 100
+    costmap_frame_id: "robot/chassis/lidar"
