@@ -1,12 +1,56 @@
-# WATonomous ASD Admissions Assignment
+# Autonomous Navigation Stack (ROS2 + Gazebo)
 
-## Prerequisite Installation
-These steps are to setup the monorepo to work on your own PC. We utilize docker to enable ease of reproducibility and deployability.
+A full autonomous navigation stack for a simulated differential-drive robot
+in **ROS2 Humble** and **Gazebo**. The robot navigates from point A to point
+B around static obstacles using only a laser scanner and camera as sensor
+inputs.
 
-> Why docker? It's so that you don't need to download any coding libraries on your bare metal pc, saving headache :3
+Built as my admissions submission for the **WATOnomous Autonomous Software
+Division (ASD)**.
 
-1. This assignment is supported on Linux Ubuntu >= 22.04, Windows (WSL), and MacOS. This is standard practice that roboticists can't get around. To setup, you can either setup an [Ubuntu Virtual Machine](https://ubuntu.com/tutorials/how-to-run-ubuntu-desktop-on-a-virtual-machine-using-virtualbox#1-overview), setting up [WSL](https://learn.microsoft.com/en-us/windows/wsl/install), or setting up your computer to [dual boot](https://opensource.com/article/18/5/dual-boot-linux). You can find online resources for all three approaches.
-2. Once inside Linux, [Download Docker Engine using the `apt` repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
-3. You're all set! You can begin the assignment by visiting the WATonomous Wiki.
+📺 **Demo video:** https://youtu.be/LgNThwbEUFw
+📄 **Assignment spec:** https://wiki.watonomous.ca/admission_assignments/asd_admission_assignment/
 
-Link to Onboarding Assignment: https://wiki.watonomous.ca/
+---
+
+## What it does
+
+The stack runs as four interconnected ROS2 nodes implemented in C++:
+
+| Node | Responsibility |
+|---|---|
+| **Costmap node** | Converts raw laser scans into local occupancy grids. |
+| **Map Memory node** | Aggregates per-frame costmaps into a persistent global map. |
+| **Planner node** | A* path search over the global costmap. |
+| **Control node** | Pure Pursuit steering to track the planned path. |
+
+The flow is: laser scan → local costmap → global map → A* path → Pure
+Pursuit velocity commands → robot motion in Gazebo. Live state is
+visualised through Foxglove.
+
+---
+
+## Stack
+
+- **ROS2 Humble** (C++)
+- **Gazebo** simulation
+- **Foxglove** for visualisation
+- **Docker** monorepo for reproducibility
+- **CMake**, shell scripts, and a `watod` entrypoint for one-command runs
+
+---
+
+## Quick start
+
+### Prerequisites
+
+- Linux Ubuntu 22.04 or newer (or WSL on Windows, or macOS)
+- Docker Engine
+- Git
+
+### Run it
+
+```bash
+git clone https://github.com/Haaris-7/<new-repo-name>.git
+cd <new-repo-name>
+./watod up
